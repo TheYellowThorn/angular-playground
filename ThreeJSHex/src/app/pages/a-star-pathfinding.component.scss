@@ -1,0 +1,94 @@
+$boxSize: 40px;
+
+.container {
+    padding:10px;
+}
+.row {
+    position: relative;
+    display: block;
+    width: auto;
+    height: $boxSize;
+}
+.box {
+    position: relative;
+    display: inline-block;
+    width: $boxSize;
+    height: $boxSize;
+    box-sizing: border-box;
+
+    background-color: #f2f2f2;
+    border: 1px solid #cccccc;
+
+    &:hover {
+        border: 2px solid #999999;
+    }
+}
+.start {
+    background-color: #55FF22;
+    cursor: pointer;
+}
+.end {
+    background-color: #aaFF88;
+    cursor: pointer;
+}
+.obstacle {
+    background-color: #333333;
+}
+.buttons {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+}
+.path {
+    background-color: #cccccc;
+}
+.shift {
+    margin-left: 10px;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 3px;
+    width: auto;
+    color: #000;
+    background-color: #f2f2f2;
+    border: 1px solid #cccccc;
+}
+.shift-down {
+    color: #fff;
+    background-color: #333;
+    border: 1px solid #000;
+}
+
+.show-costs, .horiz-only {
+    margin-left: 5px;
+}
+.closed-set-details {
+    position: absolute;
+    width: $boxSize;
+    height: $boxSize;
+    user-select: none;
+}
+.g-cost {
+    position: absolute;
+    top: 0px;
+    left: 2px;
+    height: 0.5em;
+    font-size: 0.25em;
+    text-align: right;;
+}
+.h-cost {
+    position: absolute;
+    top: 0px;
+    right: 3px;
+    height: 0.5em;
+    font-size: 0.25em;  
+    text-align: left;
+}
+.f-cost {
+    position: absolute;
+    top: 40%;
+    left: 0px;
+    height: 1em;
+    width: 100%;
+    font-size: 0.75em;
+    text-align: center; 
+}
