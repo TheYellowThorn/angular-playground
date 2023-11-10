@@ -1,0 +1,46 @@
+<div class="container">
+    <div *ngFor="let row of rows; let i = index;" class="row" [ngClass]="{ 'shift':  i % 2 !== 0 }">
+        <!-- <div *ngFor="let item of row; let j = index;" class="hexagon" [ngClass]="{ 'raised-1': raisedHeight1(j, i) }">
+            <div *ngIf="raisedHeight1(j, i)" class="riser-1"></div>
+            <div *ngIf="raisedHeight2(j, i)" class="riser-2"></div>
+            <div class="hex" [ngStyle]="{ 'top: 14px': raisedHeight1(j, i) }"></div>  
+        </div> -->
+        <div #hexagon *ngFor="let item of row; let j = index;" class="hexagon"
+        (click)="hexClicked($event, j, i)"
+        [ngClass]="{
+            'raised-1': raisedHeight(j, i) === 1,
+            'raised-2': raisedHeight(j, i) === 2,
+            'placement-mode': inPlacementMode()
+         }">
+            <div *ngIf="raisedHeight(j, i) === 1" class="riser-1"></div>
+            <div *ngIf="raisedHeight(j, i) === 2" class="riser-2"></div>
+            <div *ngIf="raisedHeight(j, i) === 2" class="light-riser"></div>
+            <div class="hex" [style.top.px]="-raisedHeight(j, i) * 10 + 24"></div>  
+            <!-- <div class="oval"></div> -->
+            <img *ngIf="unitOnTile(j, i)" class="spawn-body"
+                [ngClass]="{
+                    'position-front': battleService.unitBeingPlaced && (battleService.unitBeingPlaced.direction === unitPositions.UNSET || battleService.unitBeingPlaced.direction === unitPositions.FRONT),
+                    'position-front-right': battleService.unitBeingPlaced && battleService.unitBeingPlaced.direction === unitPositions.FRONT_RIGHT,
+                    'position-back-right': battleService.unitBeingPlaced && battleService.unitBeingPlaced.direction === unitPositions.BACK_RIGHT,
+                    'position-back': battleService.unitBeingPlaced && battleService.unitBeingPlaced.direction === unitPositions.BACK,
+                    'position-back-left': battleService.unitBeingPlaced && battleService.unitBeingPlaced.direction === unitPositions.BACK_LEFT,
+                    'position-front-left': battleService.unitBeingPlaced && battleService.unitBeingPlaced.direction === unitPositions.FRONT_LEFT,
+                    'positioning-unit': inPositionMode(),
+                    'unit-raise-1': raisedHeight(j, i) === 1,
+                    'unit-raise-2': raisedHeight(j, i) === 2
+                }"
+                src="assets/mutation/spawn_body.svg" />
+        </div>
+    </div>
+    
+    <!-- <div class="ball"><span class="shadow"></span></div> -->
+</div>
+<canvas #canvas2d id="canvas2d"></canvas>
+<div class="user-interface">
+    <!-- <div class="battle-mode">Battle Mode: {{ battleService.currentBattleCycle.CYCLE_NAME }}</div>
+    <div class="turn-mode">Turn Action: {{ battleService.currentTurnAction.ACTION_NAME }}</div> -->
+    <div>Team 1: </div> 
+    <!-- {{ battleService.currentTeamName() }}  -->
+    <button *ngIf="!(inPlacementMode() || inPositionMode())" (click)="spawnUnit($event)">Spawn Units (3)</button>
+    <button *ngIf="inPlacementMode() || inPositionMode()" (click)="cancelSpawn($event)">Cancel Spawn</button>
+</div>
