@@ -1,0 +1,7 @@
+<div>
+    <canvas #canvas id="canvas"></canvas>
+</div>
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1; background-color: #333; padding: 3px;">
+    <input type="checkbox" id="icosahedron-net" (click)="toggleNet($event)" [checked]="icosahedronDualNetMesh0 && sceneBuilderService && icosahedronDualNetMesh0.parent === sceneBuilderService.scene">
+    <label for="icosahedron-net" style="position: relative; margin-left: 5px; font-size: 10px; color: #fff; top: -3px; margin-right: 5px;">Toggle Net</label>
+</div>

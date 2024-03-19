@@ -1,0 +1,296 @@
+$sqrt3: 1.7320508;
+$hexSpacer: 5px;
+$hexSize: 100px;
+$shiftSize: calc(0.5 * ($hexSize + $hexSpacer));
+$hexWidth: calc(($hexSize + $hexSpacer));
+$hexHeight: calc($hexSize * 2 / $sqrt3);
+$hexTriangleHeight: calc(( $hexHeight - $hexSize ) * 2);
+$rowHeight: calc($hexHeight - $hexTriangleHeight + $hexSpacer);
+$unitSize: calc($hexSize * 0.75);
+$riserColor: rgb(56, 56, 56);
+$lightRiserColor: rgb(200, 200, 200);
+
+#canvas2d {
+    position: fixed;
+    bottom: 0px;
+    left:0px;
+}
+.container {
+    margin-top:200px;
+    padding:10px;
+    box-sizing: border-box;
+    transform: scale(0.5) translateY(-50%);
+}
+.user-interface {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding:10px;
+    box-sizing: border-box;
+}
+.row {
+    position: relative;
+    display: block;
+    width: auto;
+    height: $rowHeight; // $hexSize;
+    white-space: nowrap;
+}
+.shift {
+    left: $shiftSize;
+}
+.hexagon {
+    position: relative;
+    display: inline-block;
+    width: $hexWidth;
+    height: $hexHeight;
+    box-sizing: border-box;
+
+    background-color: transparent;
+
+    &.raised-1, &.raised-2 {
+        filter: drop-shadow(15px 0px 5px #060);
+        // filter: drop-shadow(0px -15px 15px #060);
+    }
+
+    &.placement-mode:hover {
+        filter: drop-shadow(0px 0px 3px #003);
+    }
+
+    .spawn-body {
+        position: absolute;
+        top: 13px;
+        left: 10px;
+        width: 76px;
+        height: 76px;
+
+        &.unit-raise-1 {
+            top: 4px;
+        }
+        &.unit-raise-2 {
+            top: -5px;
+        }
+    }
+
+    .positioning-unit {
+        opacity: 0.5;
+    }
+    
+    .position-front {
+        transform: rotate(-30deg);
+    }
+    .position-front-right {
+        transform: rotate(30deg);
+    }
+    .position-back-right {
+        transform: rotate(90deg);
+    }
+    .position-back {
+        transform: rotate(150deg);
+    }
+    .position-back-left {
+        transform: rotate(210deg);
+    }
+    .position-front-left {
+        transform: rotate(270deg);
+    }
+
+    .oval {
+        position: absolute;
+        top: 14px;
+        left: 12px;
+        width: 76px;
+        height: 80px;
+        background: #a84909;
+        border-radius: 50%;
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            width: 40px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+    }
+
+    .hex {
+        top: 24px;
+        left: 0px;
+        position: absolute;
+        margin: 0 auto;
+          
+        // background: linear-gradient(to left,
+        //            DarkBlue, DodgerBlue);
+        background: #6c6;
+        border-radius: 10px;
+        width: 100px; 
+        height: 63px;
+        box-sizing: border-box;
+        transition: all 1s;
+        border: 0.4vh solid transparent;
+        border-color: #6c6;
+        // border-top-color: dodgerblue;
+        // border-bottom-color: dodgerblue;
+    }
+
+    .hex:before, .hex:after {
+        content: "";
+        border: inherit;
+        position: absolute;
+        top: -0.5vh;
+        left: -0.5vh;
+          
+        /*To Add effect on the background*/
+        // background: linear-gradient(to left,
+        //         DarkBlue, DodgerBlue);
+        background: #6c6;
+        border-radius: inherit;
+        height: 100%;
+        width: 100%;
+    }
+      
+    /* Align them in such a way
+    that they form a hexagon */
+    .hex:before {
+        transform: rotate(60deg);
+    }
+    .hex:after {
+        transform: rotate(-60deg);
+    }
+
+    .riser-1, .riser-2, .light-riser {
+        top: 26px;
+        left: 0px;
+        position: absolute;
+        margin: 0 auto;
+          
+        // background: linear-gradient(to left,
+        //            DarkBlue, DodgerBlue);
+        background: $riserColor;
+        border-radius: 10px;
+        width: 100px; 
+        height: 63px;
+        box-sizing: border-box;
+        transition: all 1s;
+        border: 0.4vh solid transparent;
+        border-color: $riserColor;
+        // border-top-color: dodgerblue;
+        // border-bottom-color: dodgerblue;
+    }
+    .light-riser {
+        background: $lightRiserColor;
+        border-color: $lightRiserColor;
+    }
+
+    .riser-1 {
+        top: 26px;
+    }
+    .riser-2 {
+        top: 28px;
+    }
+    .light-riser {
+        top: 14px;
+    }
+
+    .riser-1:before, .riser-1:after, .riser-2:before, .riser-2:after, .light-riser:before, .light-riser:after {
+        content: "";
+        border: inherit;
+        position: absolute;
+        top: -0.5vh;
+        left: -0.5vh;
+          
+        /*To Add effect on the background*/
+        // background: linear-gradient(to left,
+        //         DarkBlue, DodgerBlue);
+        background: $riserColor;
+        border-radius: inherit;
+        height: 100%;
+        width: 100%;
+    }
+
+    .light-riser:before, .light-riser:after {
+        background: $lightRiserColor;
+    }
+      
+    /* Align them in such a way
+    that they form a hexagon */
+    .hex:before {
+        transform: rotate(60deg);
+    }
+    .hex:after {
+        transform: rotate(-60deg);
+    }
+    .riser-1:before, .riser-2:before, .light-riser:before {
+        transform: rotate(60deg);
+    }
+    .riser-1:after, .riser-2:after, .light-riser:after {
+        transform: rotate(-60deg);
+    }
+}
+
+.ball {
+    position: absolute;
+    display: block;
+    top: 28px;
+    left: 128px;
+    width: $unitSize;
+    height: $unitSize;
+    margin: 0;
+    border-radius: 50%;
+    background: url(http://hop.ie/balls/images/tennisball.png) no-repeat;
+    background-size: 100%;
+    box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.9);
+    // filter: saturate(271%);
+    // filter: contrast(1.75);
+    filter: brightness(61%) contrast(400%) hue-rotate(160deg);
+    
+}
+.ball:before {
+    content: "";
+    position: absolute;
+    top: 1%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+    -webkit-filter: blur(5px);
+    z-index: 2;
+}
+.ball:after {
+    content: "";
+    position: absolute;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(245, 237, 48, 0), rgba(200, 190, 20, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%);
+}
+.ball .shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+    -webkit-transform: rotateX(90deg) translateZ(-160px);
+    transform: rotateX(90deg) translateZ(-160px);
+    z-index: 1; 
+}
+.stage {
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    margin: 20px;
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -ms-perspective: 1200px;
+    -o-perspective: 1200px;
+    perspective: 1200px;
+    -webkit-perspective-origin: 50% 50%;
+    -moz-perspective-origin: 50% 50%;
+    -ms-perspective-origin: 50% 50%;
+    -o-perspective-origin: 50% 50%;
+    perspective-origin: 50% 50%;
+}
